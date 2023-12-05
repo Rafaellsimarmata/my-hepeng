@@ -11,77 +11,79 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
-    <!-- Header -->
-    <header>
-        <nav class="navbar navbar-expand-lg">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="index.php"><img src="img/logo-sekunder-light.png" alt=""></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
-                        <a class="nav-link active" aria-current="page" href="index.php">Dashboard</a>
-                        <a class="nav-link" href="pemasukan.php">Pemasukan</a>
-                        <a class="nav-link" href="pengeluaran.php">Pengeluaran</a>
-                    </div>
-                    <div class="navbar-nav">
-                        <a class="nav-link" href="pemasukan.php">Log In</a>
-                        <a class="nav-link" href="pengeluaran.php">Sign Up</a>
-                    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <button id="sidebarCollapse">&#9776;</button>
+            <nav id="sidebar" class="sidebar">
+                <a class="navbar-brand" href="index.php"><img src="img/logo-sekunder-dark.png" alt="MyHepeng" class="main-logo"></a>
+                <hr>
+                <div class="position-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="index.php">
+                                Dashboard
+                            </a>
+                        </li>
+                        <hr>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pemasukan.php">
+                                Pemasukan
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pengeluaran.php">
+                                Pengeluaran
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-            </div>
-        </nav>
-    </header>
+                
+            </nav>
+            <main>
+                <!-- Greeting -->
+                <section class="greeting">
+                    <div>
+                        <?php
+                        // variabel sementara untuk name
+                        $name = "Harry";
+                        echo "<h1>Halo, $name!</h1>";
+                        ?>
+                    </div>
+                </section>
 
-    <!-- Main -->
-    <main>
-        <!-- Greeting -->
-        <section class="greeting">
-            <div>
-                <?php
-                // variabel sementara untuk name
-                $name = "Harry";
-                echo "<h1>Halo, $name!</h1>";
-                ?>
-            </div>
-        </section>
-        
-        <!-- Utama -->
-        <section class="utama">
-            <div>
-                <table>
-                    <?php
-                    // variabel sementara
-                    $pemasukan = 1500000;
-                    $pengeluaran = 5000000;
-                    $saldo = $pengeluaran - $pemasukan;
-                    echo "<tbody>
-                    <tr>
-                        <th scope=row>Saldo</th>
-                        <td class=colon>:</td>
-                        <td>Rp. $saldo</td>
-                    </tr>
-                    <tr>
-                        <th scope=row>Total Pemasukan</th>
-                        <td class=colon>:</td>
-                        <td>Rp. $pemasukan</td>
-                    </tr>
-                    <tr>
-                        <th scope=row>Total Pengeluaran</th>
-                        <td class=colon>:</td>
-                        <td>Rp. $pengeluaran</td>
-                    </tr>
-                </tbody>";
-                    ?>
-                </table>
-            </div>
-        </section>
-        
-    </main>
-    
+                <!-- Utama -->
+                <section class="utama">
+                    <h2>Dashboard</h2>
+                    <br>
+                    <!-- Cards -->
+                    <div class="card-container">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">Pendapatan</h5>
+                                <h3>Rp.5.000.000</h3>
+                            </div>
+                        </div>
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">Pengeluaran</h5>
+                                <h3>Rp.5.000.000</h3>
+                            </div>
+                        </div>
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">Sisa Saldo</h5>
+                                <h3>Rp.5.000.000</h3>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
 
     <!-- Footer -->
+
+
+    <script src="script.js"></script>
 </body>
 </html>
