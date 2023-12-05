@@ -14,7 +14,7 @@
     
     <!-- Header -->
     <header>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
                 <a class="navbar-brand" href="index.php"><img src="img/logo-sekunder-light.png" alt=""></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,5 +34,54 @@
             </div>
         </nav>
     </header>
+
+    <!-- Main -->
+    <main>
+        <!-- Greeting -->
+        <section class="greeting">
+            <div>
+                <?php
+                // variabel sementara untuk name
+                $name = "Harry";
+                echo "<h1>Halo, $name!</h1>";
+                ?>
+            </div>
+        </section>
+        
+        <!-- Utama -->
+        <section class="utama">
+            <div>
+                <table>
+                    <?php
+                    // variabel sementara
+                    $pemasukan = 1500000;
+                    $pengeluaran = 5000000;
+                    $saldo = $pengeluaran - $pemasukan;
+                    echo "<tbody>
+                    <tr>
+                        <th scope=row>Saldo</th>
+                        <td class=colon>:</td>
+                        <td>Rp. $saldo</td>
+                    </tr>
+                    <tr>
+                        <th scope=row>Total Pemasukan</th>
+                        <td class=colon>:</td>
+                        <td>Rp. $pemasukan</td>
+                    </tr>
+                    <tr>
+                        <th scope=row>Total Pengeluaran</th>
+                        <td class=colon>:</td>
+                        <td>Rp. $pengeluaran</td>
+                    </tr>
+                </tbody>";
+                    ?>
+                </table>
+            </div>
+        </section>
+        
+    </main>
+    
+
+    <!-- Footer -->
 </body>
 </html>
