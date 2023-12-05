@@ -13,6 +13,13 @@ html {
 body {
     overflow-x: hidden;
     position: relative;
+    background-color: #f7f7f7;
+}
+
+header {
+    background-color: #f1f1f1;
+    border-bottom: 1px solid #333333;
+    padding: 0.75rem;
 }
 
 header .navbar img {
@@ -24,12 +31,78 @@ header .navbar-collapse {
     justify-content: space-between;
 }
 
+main section.greeting {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+    background-image: linear-gradient(90deg, #9929ea, #621bf4);
+}
+
+main section.utama {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    min-height: 30vh;
+}
+
+h1 {
+    color: #ffffff;
+    font-size: 3rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+main section.utama table {
+    width: 60vw;
+    color: #1b1b1d;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+main section.utama table th, main section.utama table td {
+    padding: 0.5rem;
+    white-space: nowrap;
+
+}
+
+main section.utama table th {
+    min-width: 50%;
+}
+
+main section.utama table td.colon {
+    width: 3%;
+}
+
+main section.utama table td {
+    width: 50%;
+}
+
+
 
 @media screen and (max-width: 992px)
 {
+    header .navbar a {
+        margin: 0 auto;
+    }
+
+    header .navbar img {
+        height: 2rem;
+    }
+
     header .navbar-collapse {
         display: flex;
         flex-direction: column;
         align-items: normal;
+    }
+
+    main section.utama table {
+        width: 80vw;
+    }
+
+    main section.utama table tr {
+        font-size: 1.5rem;
+        font-weight: bold;
     }
 }
