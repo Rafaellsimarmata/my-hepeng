@@ -1,3 +1,25 @@
+<?php
+session_start();
+
+if (!$_SESSION['login']) {
+    header("Location: login.php");
+    exit;
+}
+
+require_once "server.php";
+
+$userData = $_SESSION['userData'];
+
+// echo $_SESSION['userData']['name'];
+
+// $mahasiswa = query("SELECT * FROM mahasiswa");
+
+// if (isset($_POST['cari'])) {
+//     $mahasiswa = cari($_POST['keyword']);
+// }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,8 +67,8 @@
                     <div>
                         <?php
                         // variabel sementara untuk name
-                        $name = "Harry";
-                        echo "<h1>Halo, $name!</h1>";
+                        $name = $userData['name'];
+                        echo "<h1>Halo, $name !</h1>";
                         ?>
                     </div>
                 </section>
@@ -60,19 +82,31 @@
                         <div class="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title">Pendapatan</h5>
-                                <h3>Rp.5.000.000</h3>
+                                <?php
+                                    // variabel sementara untuk name
+                                    $earn = number_format(($userData['pendapatan']), 0);
+                                    echo "<h3> Rp$earn </h3>";
+                                ?>
                             </div>
                         </div>
                         <div class="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title">Pengeluaran</h5>
-                                <h3>Rp.5.000.000</h3>
+                                <?php
+                                    // variabel sementara untuk name
+                                    $earn = number_format(($userData['pengeluaran']), 0);
+                                    echo "<h3> Rp$pengeluaran </h3>";
+                                ?>
                             </div>
                         </div>
                         <div class="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title">Sisa Saldo</h5>
-                                <h3>Rp.5.000.000</h3>
+                                <?php
+                                    // variabel sementara untuk name
+                                    $saldo = number_format(($userData['saldo']), 0);
+                                    echo "<h3> Rp$saldo </h3>";
+                                ?>
                             </div>
                         </div>
                     </div>
