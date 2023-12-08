@@ -13,7 +13,6 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <button id="sidebarCollapse">&#9776;</button>
             <nav id="sidebar" class="sidebar">
                 <a class="navbar-brand" href="index.php"><img src="img/logo-sekunder-dark.png" alt="MyHepeng" class="main-logo"></a>
                 <hr>
@@ -35,10 +34,25 @@
                                 Pengeluaran
                             </a>
                         </li>
+                        <hr>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.php">
+                                Log In
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.php">
+                                Sign Up
+                            </a>
+                        </li>
+                    </ul>
+                        
                     </ul>
                 </div>
-                
+                <button id="sidebarCollapse">&#9776;</button>
             </nav>
+
+
             <main>
                 <!-- Greeting -->
                 <section class="greeting">
