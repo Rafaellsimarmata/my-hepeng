@@ -1,3 +1,25 @@
+<?php
+session_start();
+
+if (!$_SESSION['login']) {
+    header("Location: login.php");
+    exit;
+}
+
+require_once "server.php";
+
+$userData = $_SESSION['userData'];
+
+// echo $_SESSION['userData']['name'];
+
+// $mahasiswa = query("SELECT * FROM mahasiswa");
+
+// if (isset($_POST['cari'])) {
+//     $mahasiswa = cari($_POST['keyword']);
+// }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,16 +57,40 @@
                             </a>
                         </li>
                         <hr>
-                        <li class="nav-item">
+                        <li id="login" class="nav-item">
                             <a class="nav-link" href="login.php">
                                 Log In
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="login.php">
+                        <li id="sign-up" class="nav-item">
+                            <a class="nav-link" href="register.php">
                                 Sign Up
                             </a>
                         </li>
+                        <li id="logout" class="nav-item">
+                            <a class="nav-link" href="logout.php">
+                                Log Out
+                            </a>
+                        </li>
+                        <?php
+                        if(!$_SESSION['login']){
+                            echo "
+                                <script>
+                                    document.getElementById('login').style.display = 'block';
+                                    document.getElementById('sign-up').style.display = 'block';
+                                    document.getElementById('logout').style.display = 'none';
+                                </script>
+                            ";
+                        }else{
+                            echo"
+                                <script>
+                                    document.getElementById('login').style.display = 'none';
+                                    document.getElementById('sign-up').style.display = 'none';
+                                    document.getElementById('logout').style.display = 'block';
+                                </script>
+                            ";
+                        }
+                        ?>
                     </ul>
                         
                     </ul>
@@ -59,7 +105,7 @@
                     <div>
                         <?php
                         // variabel sementara untuk name
-                        $name = "Harry";
+                        $name = $userData['name'];
                         echo "<h1>Halo, $name!</h1>";
                         ?>
                     </div>
@@ -74,19 +120,31 @@
                         <div class="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title">Pendapatan</h5>
-                                <h3>Rp.5.000.000</h3>
+                                <?php
+                                    // variabel sementara untuk name
+                                    $earn = $userData['pendapatan'];
+                                    echo "<h3>Rp.$earn</h3>";
+                                ?>
                             </div>
                         </div>
                         <div class="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title">Pengeluaran</h5>
-                                <h3>Rp.5.000.000</h3>
+                                 <?php
+                                    // variabel sementara untuk name
+                                    $spend = $userData['pengeluaran'];
+                                    echo "<h3>Rp.$spend</h3>";
+                                ?>
                             </div>
                         </div>
                         <div class="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title">Sisa Saldo</h5>
-                                <h3>Rp.5.000.000</h3>
+                                <?php
+                                    // variabel sementara untuk name
+                                    $saldo = $userData['saldo'];
+                                    echo "<h3>Rp.$saldo</h3>";
+                                ?>
                             </div>
                         </div>
                     </div>

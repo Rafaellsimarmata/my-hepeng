@@ -1,3 +1,39 @@
+<?php 
+    session_start();
+
+    if (isset($_SESSION['login'])) {
+        header("Location: index.php");
+        exit;
+    }
+
+    require_once "server.php";
+
+    if (isset($_POST['register'])) {
+        $email = $_POST['email'];
+
+        if (register($_POST) > 0) {
+            
+                $queryUserData = mysqli_query($conn, "SELECT * FROM users WHERE email = '$email'");
+                $userData = mysqli_fetch_assoc($queryUserData);
+
+                $_SESSION['login'] = true;
+                $_SESSION['userData'] = $userData;
+
+                echo "
+                    <script>
+                        alert('Registrasi Berhasil')
+                    </script>
+                ";
+                header('Location: index.php');
+                exit;
+        } else {
+            echo mysqli_error($koneksi);
+        }
+    }
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,24 +51,28 @@
     <main>
         <section class="login">
             <!-- TODO: form action -->
-            <form action="">
+            <form action="" method="post">
                 <img src="img/logo-sekunder-light.png" alt="MyHepeng">
                 <div class="form-group">
-                    <label for="input_email">Alamat Email</label>
-                    <input type="email" class="form-control" id="input_email" aria-describedby="emailHelp" placeholder="contoh@gmail.com" required>
+                    <label for="fullname">fullname</label>
+                    <input type="text" class="form-control"  name="fullname" id="fullname" aria-describedby="emailHelp" placeholder="Your FullName" required>
                 </div>
                 <div class="form-group">
-                    <label for="input_password">Password</label>
-                    <input type="password" class="form-control" id="input_password" placeholder="Password" required>
+                    <label for="email">Alamat Email</label>
+                    <input type="email" class="form-control"  name="email" id="email" aria-describedby="emailHelp" placeholder="contoh@gmail.com" required>
                 </div>
                 <div class="form-group">
-                    <label for="input_password_2">Confirm Password</label>
-                    <input type="password" class="form-control" id="input_password_2" placeholder="Confirm Password" required>
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                </div>
+                <div class="form-group">
+                    <label for="password2">Confirm Password</label>
+                    <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirm Password" required>
                 </div>
                 <br>
                 <br>
 
-                <button type="submit" class="btn btn-primary submit">Sign Up</button>
+                <button type="submit" class="btn btn-primary submit" name="register">Sign Up</button>
             </form>
         </section>
     </main>
