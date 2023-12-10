@@ -59,8 +59,7 @@
         return $rows;
     }
 
-    function tambahEarning($data, $userData)
-    {
+    function tambahEarning($data, $userData){
         global $conn;
 
         $name = htmlspecialchars($data['name']);
@@ -80,8 +79,7 @@
         return mysqli_affected_rows($conn);
     }
 
-    function tambahSpending($data, $userData)
-    {
+    function tambahSpending($data, $userData){
         global $conn;
 
         $name = htmlspecialchars($data['name']);
@@ -101,4 +99,33 @@
         return mysqli_affected_rows($conn);
     }
 
+    function deleteData($actId){
+
+        global $conn;
+
+        $sql = "DELETE FROM `lapkeu` WHERE `id` = '$actId'";
+        mysqli_query($conn, $sql);
+        return mysqli_affected_rows($conn);
+    }
+
+    function updateData($data){
+        global $conn;
+
+        $id = $data['id'];
+        $deskripsi = htmlspecialchars($data['deskripsi']);
+        $name = htmlspecialchars($data['name']);
+        $total = htmlspecialchars($data['total']);
+
+        $sql = "UPDATE lapkeu 
+                SET 
+                act_name = '$name',
+                deskripsi = '$deskripsi',
+                total = '$total',
+                WHERE id = $id;
+        ";
+
+        mysqli_query($conn, $sql);
+
+        return mysqli_affected_rows($conn);
+    }
 ?>
