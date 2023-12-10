@@ -4,8 +4,7 @@
  
     if(!$conn) die(mysqli_error($conn));
 
-    function register($data)
-    {
+    function register($data){
         global $conn;
 
         $email = strtolower(stripslashes($data['email']));
@@ -47,5 +46,59 @@
         return mysqli_affected_rows($conn);
     }
 
+    function query($sql){
+        global $conn;
+
+        $hasil = mysqli_query($conn, $sql);
+
+        $rows = [];
+        while ($data = mysqli_fetch_assoc($hasil)) {
+            $rows[] = $data;
+        }
+
+        return $rows;
+    }
+
+    function tambahEarning($data, $userData)
+    {
+        global $conn;
+
+        $name = htmlspecialchars($data['name']);
+        $deskripsi = htmlspecialchars($data['deskripsi']);
+        $total = htmlspecialchars($data['total']);
+        $idUser = $userData['id'];
+        $type = 'pemasukan';
+
+        $sql = "INSERT INTO 
+                lapkeu 
+                VALUES 
+                (null, null, '$deskripsi', '$type', '$total', '$name', '$idUser')
+        ";
+
+        mysqli_query($conn, $sql);
+
+        return mysqli_affected_rows($conn);
+    }
+
+    function tambahSpending($data, $userData)
+    {
+        global $conn;
+
+        $name = htmlspecialchars($data['name']);
+        $deskripsi = htmlspecialchars($data['deskripsi']);
+        $total = htmlspecialchars($data['total']);
+        $idUser = $userData['id'];
+        $type = 'pengeluaran';
+
+        $sql = "INSERT INTO 
+                lapkeu 
+                VALUES 
+                (null, null, '$deskripsi', '$type', '$total', '$name', '$idUser')
+        ";
+
+        mysqli_query($conn, $sql);
+
+        return mysqli_affected_rows($conn);
+    }
 
 ?>
