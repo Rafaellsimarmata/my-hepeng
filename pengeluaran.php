@@ -26,7 +26,7 @@
                         <hr>
                         <li class="nav-item">
                             <a class="nav-link" href="pemasukan.php">
-                                pemasukan
+                                Pemasukan
                             </a>
                         </li>
                         <li class="nav-item">
@@ -54,8 +54,8 @@
                         
                     </ul>
                 </div>
-                <button id="sidebarCollapse">&#9776;</button>
             </nav>
+            <button id="sidebarCollapse">&#9776;</button>
 
 
             <main>
