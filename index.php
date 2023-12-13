@@ -55,8 +55,8 @@
                         
                     </ul>
                 </div>
-                <button id="sidebarCollapse">&#9776;</button>
             </nav>
+            <button id="sidebarCollapse">&#9776;</button>
 
 
             <main>

@@ -77,7 +77,7 @@ body {
 }
 
 main {
-    margin: 0 0 0 20vw !important;
+    margin: 0 0 0 20vw;
     padding: 0 0 0 0 !important;
     width: 80vw;
     transition: margin-left 0.3s ease;
