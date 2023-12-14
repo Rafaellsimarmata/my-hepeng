@@ -103,6 +103,7 @@ if (isset($_POST['submit'])) {
                     <br>
                     <!-- Forms -->
                     <form action="" method="post">
+                        <input type="hidden" name="id" value="<?= $detailData['id']; ?>">
                         <div class="form-group">
                             <label for="input_pemasukan">Nama Pemasukan</label>
                             <input type="text" class="form-control" name="name" id="input_pemasukan" aria-describedby="emailHelp" value="<?= $detailData['act_name']; ?>" required>

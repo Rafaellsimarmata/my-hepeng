@@ -132,13 +132,7 @@
         $name = htmlspecialchars($data['name']);
         $total = htmlspecialchars($data['total']);
 
-        $sql = "UPDATE lapkeu 
-                SET 
-                act_name = '$name',
-                deskripsi = '$deskripsi',
-                total = '$total',
-                WHERE id = $id;
-        ";
+        $sql = "UPDATE `lapkeu` SET `deskripsi`='$deskripsi',`total`='$total',`act_name`='$name' WHERE `id` = $id";
 
         mysqli_query($conn, $sql);
 
