@@ -4,6 +4,18 @@
  
     if(!$conn) die(mysqli_error($conn));
 
+    function getSaldo($idUser){
+        global $conn;
+
+        // cek email sudah ada atau belum
+        $totalPendapatan = mysqli_fetch_assoc(mysqli_query($conn, "SELECT SUM(total) FROM lapkeu WHERE `tipe` = 'pemasukan' AND `id_user` = $idUser "));
+        $totalPengeluaran = mysqli_fetch_assoc(mysqli_query($conn, "SELECT SUM(total) FROM lapkeu WHERE `tipe` = 'pengeluaran' AND `id_user` = $idUser "));
+
+        $saldo = $totalPendapatan['SUM(total)'] - $totalPengeluaran['SUM(total)'];
+
+        return $saldo;
+    }
+
     function register($data){
         global $conn;
 
@@ -66,8 +78,6 @@
         $deskripsi = htmlspecialchars($data['deskripsi']);
         $total = htmlspecialchars($data['total']);
         $idUser = $userData['id'];
-        $prevUserSaldo = $userData['saldo'];
-        $prevEarning =  $userData['pendapatan'];
         $type = 'pemasukan';
 
         $sql = "INSERT INTO 
@@ -76,13 +86,7 @@
                 (null, null, '$deskripsi', '$type', '$total', '$name', '$idUser')
         ";
 
-        $currUserSaldo = $prevUserSaldo + $total;
-        $currEarning = $prevEarning + $total;
-
-        $userSql = "UPDATE `users` SET `saldo`='$currUserSaldo',`pendapatan`='$currEarning' WHERE `id` = '$idUser' ";
-
         mysqli_query($conn, $sql);
-        mysqli_query($conn, $userSql);
 
         return mysqli_affected_rows($conn);
     }
@@ -94,8 +98,6 @@
         $deskripsi = htmlspecialchars($data['deskripsi']);
         $total = htmlspecialchars($data['total']);
         $idUser = $userData['id'];
-        $prevUserSaldo = $userData['saldo'];
-        $prevSpendings =  $userData['pengeluaran'];
         $type = 'pengeluaran';
 
         $sql = "INSERT INTO 
@@ -104,13 +106,7 @@
                 (null, null, '$deskripsi', '$type', '$total', '$name', '$idUser')
         ";
 
-        $currUserSaldo = $prevUserSaldo - $total;
-        $currSpendings = $prevSpendings + $total;
-
-        $userSql = "UPDATE `users` SET `saldo`='$currUserSaldo',`pengeluaran`='$currSpendings' WHERE `id` = '$idUser' ";
-
         mysqli_query($conn, $sql);
-        mysqli_query($conn, $userSql);
 
         return mysqli_affected_rows($conn);
     }

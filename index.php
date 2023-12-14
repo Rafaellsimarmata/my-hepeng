@@ -14,10 +14,11 @@ $userData = query("SELECT * FROM users WHERE id = '$idUser'");
 $userEarningsReport = query("SELECT * FROM lapkeu WHERE id_user = '$idUser' AND tipe = 'pemasukan'");
 $userSpendsReport = query("SELECT * FROM lapkeu WHERE id_user = '$idUser' AND tipe = 'pengeluaran'");
 
-$userSaldo = $userData[0]['saldo'];
+$userSaldo = getSaldo($idUser);
 $userEarnings = $userData[0]['pendapatan'];
 $userSpendings = $userData[0]['pengeluaran'];
 
+// var_dump($userSaldo);
 // if (isset($_POST['cari'])) {
 //     $mahasiswa = cari($_POST['keyword']);
 // }
