@@ -1,3 +1,36 @@
+<?php
+session_start();
+
+if (!$_SESSION['login']) {
+    header("Location: login.php");
+    exit;
+}
+
+require_once "server.php";
+
+$userData = $_SESSION['userData'];
+
+if (isset($_POST['submit'])) {
+	
+	// cek apakah data berhasil ditambahkan
+	if (tambahSpending($_POST,$userData) > 0) {
+		echo " 
+			<script>
+				alert('data berhasil ditambahkan')
+				document.location.href = 'index.php'
+			</script>
+		";
+	} else {
+		echo "
+			<script>
+				alert('data gagal ditambahkan')
+			</script>
+		";
+	}
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,16 +68,6 @@
                             </a>
                         </li>
                         <hr>
-                        <li id="login" class="nav-item">
-                            <a class="nav-link" href="login.php">
-                                Log In
-                            </a>
-                        </li>
-                        <li id="sign-up" class="nav-item">
-                            <a class="nav-link" href="register.php">
-                                Sign Up
-                            </a>
-                        </li>
                         <li id="logout" class="nav-item">
                             <a class="nav-link" href="logout.php">
                                 Log Out
@@ -63,9 +86,9 @@
                 <section class="greeting">
                     <div>
                         <?php
+                        $userName = $_SESSION['userData']['name'];
                         // variabel sementara untuk name
-                        
-                        echo "<h1>Halo!</h1>";
+                        echo "<h1>Halo, $userName!</h1>";
                         ?>
                     </div>
                 </section>
@@ -78,7 +101,7 @@
                     <form action="" method="post">
                         <div class="form-group">
                             <label for="input_pengeluaran">Nama Pengeluaran</label>
-                            <input type="text" class="form-control" name="input_pengeluaran" id="input_pengeluaran" aria-describedby="emailHelp" placeholder="Contoh: Subskripsi Netflix" required>
+                            <input type="text" class="form-control" name="name" id="input_pengeluaran" aria-describedby="emailHelp" placeholder="Contoh: Subskripsi Netflix" required>
                         </div>
                         <div class="form-group">
                             <label for="deskripsi">Deskripsi</label>
@@ -87,12 +110,12 @@
 
                         <div class="form-group">
                             <label for="input_jumlah">Jumlah</label>
-                            <input type="text" class="form-control" name="jumlah" id="input_jumlah" placeholder="contoh : 200000" required>
+                            <input type="text" class="form-control" name="total" id="input_jumlah" placeholder="contoh : 200000" required>
                         </div>
 
                         <br>
                         <br>
-                        <button type="submit" class="btn btn-primary submit" name="login">Masukkan Pengeluaran</button>
+                        <button type="submit" class="btn btn-primary submit" name="submit">Masukkan Pengeluaran</button>
                     </form>
                 </section>
             </main>

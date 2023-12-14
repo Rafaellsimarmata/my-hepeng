@@ -66,7 +66,7 @@
                     <input type="password" class="form-control" name="password" id="input_password" placeholder="Password" required>
                 </div>
                 <br>
-                <br>
+                <p>Belum punya akun ?  <span><a href="register.php">Daftar Disini</a></span> </p>
                 <button type="submit" class="btn btn-primary submit" name="login">Log In</button>
             </form>
         </section>

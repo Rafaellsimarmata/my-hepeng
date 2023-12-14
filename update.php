@@ -9,21 +9,25 @@ if (!$_SESSION['login']) {
 require_once "server.php";
 
 $userData = $_SESSION['userData'];
+// ambil data di url
+$id = $_GET['id'];
+
+$detailData = query("SELECT * FROM lapkeu WHERE id = $id")[0];
 
 if (isset($_POST['submit'])) {
-	
-	// cek apakah data berhasil ditambahkan
-	if (tambahEarning($_POST,$userData) > 0) {
+
+	// cek apakah data berhasil diubah
+	if (updateData($_POST) > 0) {
 		echo " 
 			<script>
-				alert('data berhasil ditambahkan')
+				alert('data berhasil diubah')
 				document.location.href = 'index.php'
 			</script>
 		";
 	} else {
 		echo "
 			<script>
-				alert('data gagal ditambahkan')
+				alert('data gagal diubah')
 			</script>
 		";
 	}
@@ -95,27 +99,27 @@ if (isset($_POST['submit'])) {
 
                 <!-- Utama -->
                 <section class="utama">
-                    <h2>Input Pemasukan</h2>
+                    <h2>Update Pemasukan</h2>
                     <br>
                     <!-- Forms -->
                     <form action="" method="post">
                         <div class="form-group">
                             <label for="input_pemasukan">Nama Pemasukan</label>
-                            <input type="text" class="form-control" name="name" id="input_pemasukan" aria-describedby="emailHelp" placeholder="Contoh: Gaji Bulanan" required>
+                            <input type="text" class="form-control" name="name" id="input_pemasukan" aria-describedby="emailHelp" value="<?= $detailData['act_name']; ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="deskripsi">Deskripsi</label>
-                            <input type="text" class="form-control" name="deskripsi" id="deskripsi" placeholder="Contoh : Gaji Februari" required>
+                            <input type="text" class="form-control" name="deskripsi" id="deskripsi"  value="<?= $detailData['deskripsi']; ?>" required>
                         </div>
 
                         <div class="form-group">
                             <label for="input_jumlah">Jumlah</label>
-                            <input type="text" class="form-control" name="total" id="input_jumlah" placeholder="contoh : 500000000" required>
+                            <input type="text" class="form-control" name="total" id="input_jumlah"  value="<?= $detailData['total']; ?>" required>
                         </div>
 
                         <br>
                         <br>
-                        <button type="submit" class="btn btn-primary submit" name="submit">Masukkan Pemasukan</button>
+                        <button type="submit" class="btn btn-primary submit" name="submit">Update Data</button>
                     </form>
                 </section>
             </main>

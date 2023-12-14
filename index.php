@@ -1,3 +1,29 @@
+<?php
+session_start();
+
+if (!$_SESSION['login']) {
+    header("Location: login.php");
+    exit;
+}
+
+require_once "server.php";
+
+$idUser = $_SESSION['userData']['id'];
+
+$userData = query("SELECT * FROM users WHERE id = '$idUser'");
+$userEarningsReport = query("SELECT * FROM lapkeu WHERE id_user = '$idUser' AND tipe = 'pemasukan'");
+$userSpendsReport = query("SELECT * FROM lapkeu WHERE id_user = '$idUser' AND tipe = 'pengeluaran'");
+
+$userSaldo = $userData[0]['saldo'];
+$userEarnings = $userData[0]['pendapatan'];
+$userSpendings = $userData[0]['pengeluaran'];
+
+// if (isset($_POST['cari'])) {
+//     $mahasiswa = cari($_POST['keyword']);
+// }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,16 +62,6 @@
                             </a>
                         </li>
                         <hr>
-                        <li id="login" class="nav-item">
-                            <a class="nav-link" href="login.php">
-                                Log In
-                            </a>
-                        </li>
-                        <li id="sign-up" class="nav-item">
-                            <a class="nav-link" href="register.php">
-                                Sign Up
-                            </a>
-                        </li>
                         <li id="logout" class="nav-item">
                             <a class="nav-link" href="logout.php">
                                 Log Out
@@ -64,14 +80,16 @@
                 <section class="greeting">
                     <div>
                         <?php
+                        $userName = $_SESSION['userData']['name'];
                         // variabel sementara untuk name
-                        echo "<h1>Halo!</h1>";
+                        echo "<h1>Halo, $userName!</h1>";
                         ?>
                     </div>
                 </section>
 
                 <!-- Utama -->
                 <section class="utama">
+                    
                     <br>
                     <!-- Cards -->
                     <div class="pemasukan"> 
@@ -81,32 +99,32 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>Tanggal</th>
                                     <th>Nama</th>
                                     <th>Detail</th>
                                     <th>Jumlah (Rp)</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                         
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Pemasukan Bulanan</td>
-                                    <td>Gaji Bulan Januari</td>
-                                    <td>5000000</td>
-                                </tr>
-
-                                <tr>
-                                    <td>2</td>
-                                    <td>Pemasukan Bulanan</td>
-                                    <td>Gaji Bulan Februaru</td>
-                                    <td>6000000</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Pemasukan Bulanan</td>
-                                    <td>Gaji Bulan Maret</td>
-                                    <td>7000000</td>
-                                </tr>
+                                <?php
+                                    $no = 1;
+                                    foreach ($userEarningsReport as $data) : ?>
+                                    <tr>
+                                        <td><?= $no; ?></td>
+                                        <td><?= $data['date']; ?></td>
+                                        <td><?= $data['act_name']; ?></td>
+                                        <td><?= $data['deskripsi']; ?></td>
+                                        <td><?= $data['total']; ?></td>
+                                        <td>
+                                            <a href="update.php?id=<?= $data['id'] ?>">ubah</a> |
+                                            <a href="hapus.php?id=<?= $data['id'] ?>" id="hapus">hapus</a>
+                                        </td>
+                                    </tr>
+                                <?php
+                                    $no++;
+                                endforeach; ?>
                             </tbody>
                         </table>
                     </div>
@@ -118,197 +136,32 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>Tanggal</th>
                                     <th>Nama</th>
                                     <th>Detail</th>
                                     <th>Jumlah (Rp)</th>
+                                    <th>Action </th>
                                 </tr>
                             </thead>
                         
                             <tbody>
-                            <tr>
-                                    <td>1</td>
-                                    <td>Pemasukan Bulanan</td>
-                                    <td>Gaji Bulan Januari</td>
-                                    <td>5000000</td>
-                                </tr>
-
-                                <tr>
-                                    <td>2</td>
-                                    <td>Pemasukan Bulanan</td>
-                                    <td>Gaji Bulan Februaru</td>
-                                    <td>6000000</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Pemasukan Bulanan</td>
-                                    <td>Gaji Bulan Maret</td>
-                                    <td>7000000</td>
-                                </tr>
-
-                                <tr>
-                                    <td>3</td>
-                                    <td>Pemasukan Bulanan</td>
-                                    <td>Gaji Bulan Maret</td>
-                                    <td>7000000</td>
-                                </tr>
-
-                                <tr>
-                                    <td>3</td>
-                                    <td>Pemasukan Bulanan</td>
-                                    <td>Gaji Bulan Maret</td>
-                                    <td>7000000</td>
-                                </tr>
-
-                                <tr>
-                                    <td>3</td>
-                                    <td>Pemasukan Bulanan</td>
-                                    <td>Gaji Bulan Maret</td>
-                                    <td>7000000</td>
-                                </tr>
-
-                                <tr>
-                                    <td>3</td>
-                                    <td>Pemasukan Bulanan</td>
-                                    <td>Gaji Bulan Maret</td>
-                                    <td>7000000</td>
-                                </tr>
-
-                                <tr>
-                                    <td>3</td>
-                                    <td>Pemasukan Bulanan</td>
-                                    <td>Gaji Bulan Maret</td>
-                                    <td>7000000</td>
-                                </tr>
-
-                                <tr>
-                                    <td>3</td>
-                                    <td>Pemasukan Bulanan</td>
-                                    <td>Gaji Bulan Maret</td>
-                                    <td>7000000</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Pemasukan Bulanan</td>
-                                    <td>Gaji Bulan Januari</td>
-                                    <td>5000000</td>
-                                </tr>
-
-                                <tr>
-                                    <td>2</td>
-                                    <td>Pemasukan Bulanan</td>
-                                    <td>Gaji Bulan Februaru</td>
-                                    <td>6000000</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Pemasukan Bulanan</td>
-                                    <td>Gaji Bulan Maret</td>
-                                    <td>7000000</td>
-                                </tr>
-
-                                <tr>
-                                    <td>3</td>
-                                    <td>Pemasukan Bulanan</td>
-                                    <td>Gaji Bulan Maret</td>
-                                    <td>7000000</td>
-                                </tr>
-
-                                <tr>
-                                    <td>3</td>
-                                    <td>Pemasukan Bulanan</td>
-                                    <td>Gaji Bulan Maret</td>
-                                    <td>7000000</td>
-                                </tr>
-
-                                <tr>
-                                    <td>3</td>
-                                    <td>Pemasukan Bulanan</td>
-                                    <td>Gaji Bulan Maret</td>
-                                    <td>7000000</td>
-                                </tr>
-
-                                <tr>
-                                    <td>3</td>
-                                    <td>Pemasukan Bulanan</td>
-                                    <td>Gaji Bulan Maret</td>
-                                    <td>7000000</td>
-                                </tr>
-
-                                <tr>
-                                    <td>3</td>
-                                    <td>Pemasukan Bulanan</td>
-                                    <td>Gaji Bulan Maret</td>
-                                    <td>7000000</td>
-                                </tr>
-
-                                <tr>
-                                    <td>3</td>
-                                    <td>Pemasukan Bulanan</td>
-                                    <td>Gaji Bulan Maret</td>
-                                    <td>7000000</td>
-                                </tr>
-                                
-                                <tr>
-                                    <td>1</td>
-                                    <td>Pemasukan Bulanan</td>
-                                    <td>Gaji Bulan Januari</td>
-                                    <td>5000000</td>
-                                </tr>
-
-                                <tr>
-                                    <td>2</td>
-                                    <td>Pemasukan Bulanan</td>
-                                    <td>Gaji Bulan Februaru</td>
-                                    <td>6000000</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Pemasukan Bulanan</td>
-                                    <td>Gaji Bulan Maret</td>
-                                    <td>7000000</td>
-                                </tr>
-
-                                <tr>
-                                    <td>3</td>
-                                    <td>Pemasukan Bulanan</td>
-                                    <td>Gaji Bulan Maret</td>
-                                    <td>7000000</td>
-                                </tr>
-
-                                <tr>
-                                    <td>3</td>
-                                    <td>Pemasukan Bulanan</td>
-                                    <td>Gaji Bulan Maret</td>
-                                    <td>7000000</td>
-                                </tr>
-
-                                <tr>
-                                    <td>3</td>
-                                    <td>Pemasukan Bulanan</td>
-                                    <td>Gaji Bulan Maret</td>
-                                    <td>7000000</td>
-                                </tr>
-
-                                <tr>
-                                    <td>3</td>
-                                    <td>Pemasukan Bulanan</td>
-                                    <td>Gaji Bulan Maret</td>
-                                    <td>7000000</td>
-                                </tr>
-
-                                <tr>
-                                    <td>3</td>
-                                    <td>Pemasukan Bulanan</td>
-                                    <td>Gaji Bulan Maret</td>
-                                    <td>7000000</td>
-                                </tr>
-
-                                <tr>
-                                    <td>3</td>
-                                    <td>Pemasukan Bulanan</td>
-                                    <td>Gaji Bulan Maret</td>
-                                    <td>7000000</td>
-                                </tr>
+                            <?php
+                                    $no = 1;
+                                    foreach ($userSpendsReport as $data) : ?>
+                                    <tr>
+                                        <td><?= $no; ?></td>
+                                        <td><?= $data['date']; ?></td>
+                                        <td><?= $data['act_name']; ?></td>
+                                        <td><?= $data['deskripsi']; ?></td>
+                                        <td><?= $data['total']; ?></td>
+                                        <td>
+                                            <a href="update.php?id=<?= $data['id'] ?>">ubah</a> |
+                                            <a href="hapus.php?id=<?= $data['id'] ?>" id="hapus">hapus</a>
+                                        </td>
+                                    </tr>
+                                <?php
+                                    $no++;
+                                endforeach; ?>
 
                             </tbody>
                         </table>
