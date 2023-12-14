@@ -50,10 +50,7 @@
 <body>
     <main>
         <section class="login">
-                <?php if (isset($error)) : ?>
-                    <p class="pesan">username / password salah</p>
-                <?php endif; ?>
-
+            
             <!-- TODO: form action -->
             <form action="" method="post">
                 <img src="img/logo-sekunder-light.png" alt="MyHepeng" >
@@ -67,6 +64,11 @@
                 </div>
                 <br>
                 <p>Belum punya akun ?  <span><a href="register.php">Daftar Disini</a></span> </p>
+                
+                <?php if (isset($error)) : ?>
+                    <p class="pesan">username / password salah</p>
+                <?php endif; ?>
+                
                 <button type="submit" class="btn btn-primary submit" name="login">Log In</button>
             </form>
         </section>

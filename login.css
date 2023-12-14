@@ -42,6 +42,10 @@ section.login form button.submit {
     width: 30%;
 }
 
+p.pesan {
+    color: #ff0000;
+}
+
 @media screen and (max-width: 992px) {
     section.login {
         width: 50vw;
