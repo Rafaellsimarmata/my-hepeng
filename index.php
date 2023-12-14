@@ -94,7 +94,7 @@ $userSpendings = $userData[0]['pengeluaran'];
                         <br>
                         <h3>Sisa Saldo</h3>       
                         <?php
-                            echo "<h4>Halo, $userSaldo!</h4>";
+                            echo "<h4>$userSaldo</h4>";
                         ?>
                     </div>
                     <!-- Cards -->
