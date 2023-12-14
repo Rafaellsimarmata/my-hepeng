@@ -93,7 +93,9 @@ $userSpendings = $userData[0]['pengeluaran'];
                     <div class="option saldo">
                         <br>
                         <h3>Sisa Saldo</h3>       
-                        <h4>800000</h4>
+                        <?php
+                            echo "<h4>Halo, $userSaldo!</h4>";
+                        ?>
                     </div>
                     <!-- Cards -->
                     <div class="option pemasukan"> 
