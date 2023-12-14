@@ -56,7 +56,7 @@
 
             <!-- TODO: form action -->
             <form action="" method="post">
-                <img src="img/logo-sekunder-light.png" alt="MyHepeng">
+                <img src="img/logo-sekunder-light.png" alt="MyHepeng" >
                 <div class="form-group">
                     <label for="input_email">Alamat Email</label>
                     <input type="email" class="form-control" name="email" id="input_email" aria-describedby="emailHelp" placeholder="contoh@gmail.com" required>
@@ -66,8 +66,7 @@
                     <input type="password" class="form-control" name="password" id="input_password" placeholder="Password" required>
                 </div>
                 <br>
-                <br>
-
+                <p>Belum punya akun ?  <span><a href="register.php">Daftar Disini</a></span> </p>
                 <button type="submit" class="btn btn-primary submit" name="login">Log In</button>
             </form>
         </section>

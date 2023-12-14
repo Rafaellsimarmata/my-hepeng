@@ -69,9 +69,7 @@
                     <label for="password2">Confirm Password</label>
                     <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirm Password" required>
                 </div>
-                <br>
-                <br>
-
+                <p>Sudah memiliki akun ?  <span><a href="login.php">Login Disini</a></span> </p>
                 <button type="submit" class="btn btn-primary submit" name="register">Sign Up</button>
             </form>
         </section>

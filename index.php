@@ -8,11 +8,15 @@ if (!$_SESSION['login']) {
 
 require_once "server.php";
 
-$userData = $_SESSION['userData'];
+$idUser = $_SESSION['userData']['id'];
 
-// echo $_SESSION['userData']['name'];
+$userData = query("SELECT * FROM users WHERE id = '$idUser'");
+$userEarningsReport = query("SELECT * FROM lapkeu WHERE id_user = '$idUser' AND tipe = 'pemasukan'");
+$userSpendsReport = query("SELECT * FROM lapkeu WHERE id_user = '$idUser' AND tipe = 'pengeluaran'");
 
-// $mahasiswa = query("SELECT * FROM mahasiswa");
+$userSaldo = $userData[0]['saldo'];
+$userEarnings = $userData[0]['pendapatan'];
+$userSpendings = $userData[0]['pengeluaran'];
 
 // if (isset($_POST['cari'])) {
 //     $mahasiswa = cari($_POST['keyword']);
@@ -30,6 +34,7 @@ $userData = $_SESSION['userData'];
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -57,46 +62,17 @@ $userData = $_SESSION['userData'];
                             </a>
                         </li>
                         <hr>
-                        <li id="login" class="nav-item">
-                            <a class="nav-link" href="login.php">
-                                Log In
-                            </a>
-                        </li>
-                        <li id="sign-up" class="nav-item">
-                            <a class="nav-link" href="register.php">
-                                Sign Up
-                            </a>
-                        </li>
                         <li id="logout" class="nav-item">
                             <a class="nav-link" href="logout.php">
                                 Log Out
                             </a>
                         </li>
-                        <?php
-                        if(!$_SESSION['login']){
-                            echo "
-                                <script>
-                                    document.getElementById('login').style.display = 'block';
-                                    document.getElementById('sign-up').style.display = 'block';
-                                    document.getElementById('logout').style.display = 'none';
-                                </script>
-                            ";
-                        }else{
-                            echo"
-                                <script>
-                                    document.getElementById('login').style.display = 'none';
-                                    document.getElementById('sign-up').style.display = 'none';
-                                    document.getElementById('logout').style.display = 'block';
-                                </script>
-                            ";
-                        }
-                        ?>
                     </ul>
                         
                     </ul>
                 </div>
-                <button id="sidebarCollapse">&#9776;</button>
             </nav>
+            <button id="sidebarCollapse">&#9776;</button>
 
 
             <main>
@@ -104,49 +80,91 @@ $userData = $_SESSION['userData'];
                 <section class="greeting">
                     <div>
                         <?php
+                        $userName = $_SESSION['userData']['name'];
                         // variabel sementara untuk name
-                        $name = $userData['name'];
-                        echo "<h1>Halo, $name!</h1>";
+                        echo "<h1>Halo, $userName!</h1>";
                         ?>
                     </div>
                 </section>
 
                 <!-- Utama -->
                 <section class="utama">
-                    <h2>Dashboard</h2>
+                    
                     <br>
                     <!-- Cards -->
-                    <div class="card-container">
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Pendapatan</h5>
+                    <div class="pemasukan"> 
+                        <br>
+                        <h3>Pemasukan</h3>       
+                        <table class="styled-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Tanggal</th>
+                                    <th>Nama</th>
+                                    <th>Detail</th>
+                                    <th>Jumlah (Rp)</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                        
+                            <tbody>
                                 <?php
-                                    // variabel sementara untuk name
-                                    $earn = $userData['pendapatan'];
-                                    echo "<h3>Rp.$earn</h3>";
-                                ?>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Pengeluaran</h5>
-                                 <?php
-                                    // variabel sementara untuk name
-                                    $spend = $userData['pengeluaran'];
-                                    echo "<h3>Rp.$spend</h3>";
-                                ?>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Sisa Saldo</h5>
+                                    $no = 1;
+                                    foreach ($userEarningsReport as $data) : ?>
+                                    <tr>
+                                        <td><?= $no; ?></td>
+                                        <td><?= $data['date']; ?></td>
+                                        <td><?= $data['act_name']; ?></td>
+                                        <td><?= $data['deskripsi']; ?></td>
+                                        <td><?= $data['total']; ?></td>
+                                        <td>
+                                            <a href="update.php?id=<?= $data['id'] ?>">ubah</a> |
+                                            <a href="hapus.php?id=<?= $data['id'] ?>" id="hapus">hapus</a>
+                                        </td>
+                                    </tr>
                                 <?php
-                                    // variabel sementara untuk name
-                                    $saldo = $userData['saldo'];
-                                    echo "<h3>Rp.$saldo</h3>";
-                                ?>
-                            </div>
-                        </div>
+                                    $no++;
+                                endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="pengeluaran"> 
+                        <br>
+                        <h3>Pengeluaran</h3>       
+                        <table class="styled-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Tanggal</th>
+                                    <th>Nama</th>
+                                    <th>Detail</th>
+                                    <th>Jumlah (Rp)</th>
+                                    <th>Action </th>
+                                </tr>
+                            </thead>
+                        
+                            <tbody>
+                            <?php
+                                    $no = 1;
+                                    foreach ($userSpendsReport as $data) : ?>
+                                    <tr>
+                                        <td><?= $no; ?></td>
+                                        <td><?= $data['date']; ?></td>
+                                        <td><?= $data['act_name']; ?></td>
+                                        <td><?= $data['deskripsi']; ?></td>
+                                        <td><?= $data['total']; ?></td>
+                                        <td>
+                                            <a href="update.php?id=<?= $data['id'] ?>">ubah</a> |
+                                            <a href="hapus.php?id=<?= $data['id'] ?>" id="hapus">hapus</a>
+                                        </td>
+                                    </tr>
+                                <?php
+                                    $no++;
+                                endforeach; ?>
+
+                            </tbody>
+                        </table>
                     </div>
                 </section>
             </main>
