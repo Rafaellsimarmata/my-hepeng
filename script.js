@@ -9,12 +9,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Adjust the margin of the main element based on the collapsed state
         main.style.marginLeft = sidebar.classList.contains("collapsed") ? "0" : "20vw";
+        main.style.width = sidebar.classList.contains("collapsed") ? "100vw" : "80vw";
         utama.style.width = sidebar.classList.contains("collapsed") ? "100vw" : "80vw";
     });
 
     // Check if the sidebar is initially collapsed and adjust the main margin accordingly
     if (sidebar.classList.contains("collapsed")) {
         main.style.marginLeft = "0";
+        main.style.width = "100vw";
         utama.style.width = "100vw";
 
     }

@@ -89,10 +89,14 @@ $userSpendings = $userData[0]['pengeluaran'];
 
                 <!-- Utama -->
                 <section class="utama">
-                    
-                    <br>
+                    <!-- saldo -->
+                    <div class="option saldo">
+                        <br>
+                        <h3>Sisa Saldo</h3>       
+                        <h4>800000</h4>
+                    </div>
                     <!-- Cards -->
-                    <div class="pemasukan"> 
+                    <div class="option pemasukan"> 
                         <br>
                         <h3>Pemasukan</h3>       
                         <table class="styled-table">
@@ -129,7 +133,7 @@ $userSpendings = $userData[0]['pengeluaran'];
                         </table>
                     </div>
 
-                    <div class="pengeluaran"> 
+                    <div class="option pengeluaran"> 
                         <br>
                         <h3>Pengeluaran</h3>       
                         <table class="styled-table">
@@ -170,8 +174,6 @@ $userSpendings = $userData[0]['pengeluaran'];
             </main>
         </div>
     </div>
-
-    <!-- Footer -->
 
 
     <script src="script.js"></script>

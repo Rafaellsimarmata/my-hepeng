@@ -11,7 +11,6 @@ html {
 }
   
 body {
-    overflow: hidden;
     position: relative;
     background-color: #e6e6ff;
 }
@@ -85,6 +84,7 @@ main {
 
 #sidebar.collapsed + main {
     margin-left: 0 !important;
+    width: 100vw !important;
 }
 
 main section.greeting {
@@ -92,6 +92,7 @@ main section.greeting {
     padding-left: 3rem;
     align-items: center;
     height: 15vh;
+    width: 100%;
     background-color: #f3f3f3;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 10px 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -101,22 +102,34 @@ main section.utama {
     display: flex;
     justify-content: space-around;
     flex-direction: row;
+    flex-wrap: wrap;
     width: 80vw;
 }
 
-.pemasukan{
-    grid-column: 1;
-    grid-row: 1;
-    margin: 0;
-    width: auto;
-    
+
+
+.option {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #1b1b1d;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 10px 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+    margin: 1rem;
+    padding: 2rem 0;
 }
 
-.pengeluaran{
-    grid-column: 2;
-    grid-row: 1;
-    margin: 0;
-    width: auto;
+.option.saldo {
+    width: 80% !important;
+}
+
+.option.pemasukan {
+    max-width: 45%;
+}
+.option.pengeluaran {
+    max-width: 45%;
 }
 
 
@@ -169,6 +182,9 @@ h3 {
         font-size: 1.2rem;
     }
 
+    main section.utama {
+        flex-direction: column;
+    }
 }
 
 
@@ -212,10 +228,6 @@ h3 {
 
     #sidebar.collapsed + main {
         margin-left: 0;
-    }
-
-    main section.utama {
-        flex-direction: column;
     }
     
 }
