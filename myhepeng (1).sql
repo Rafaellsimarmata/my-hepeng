@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 10, 2023 at 09:14 AM
+-- Generation Time: Dec 14, 2023 at 08:51 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.2.12
 
@@ -31,10 +31,19 @@ CREATE TABLE `lapkeu` (
   `id` int(11) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `deskripsi` text NOT NULL,
-  `type` tinyint(1) NOT NULL,
+  `tipe` varchar(100) NOT NULL,
   `total` int(11) NOT NULL,
-  `act_name` varchar(255) NOT NULL
+  `act_name` varchar(255) NOT NULL,
+  `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `lapkeu`
+--
+
+INSERT INTO `lapkeu` (`id`, `date`, `deskripsi`, `tipe`, `total`, `act_name`, `id_user`) VALUES
+(7, '2023-12-14 06:55:36', 'Gaji UTOR yang sangat berharga', 'pemasukan', 500000, 'Gaji dari UTOR', 5),
+(9, '2023-12-14 07:05:19', 'Biaya bulanan wifi indihome ', 'pengeluaran', 125000, 'Biaya Wifi Indihome', 5);
 
 -- --------------------------------------------------------
 
@@ -57,8 +66,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `saldo`, `password`, `pendapatan`, `pengeluaran`) VALUES
-(1, 'Rafael Simarmata', 'simarmatarafael11@gmail.com', 0, '12345678', 0, 0),
-(5, 'putra harifin', 'putraharifin@gmail.com', 0, '$2y$10$tkvpSjsFncRSKD2JHFSxc.3nJ98yE4adk7TjqD7vKXpwga9KPKDo.', 0, 0);
+(5, 'putra harifin', 'putraharifin@gmail.com', -125000, '$2y$10$tkvpSjsFncRSKD2JHFSxc.3nJ98yE4adk7TjqD7vKXpwga9KPKDo.', 500000, 125000);
 
 --
 -- Indexes for dumped tables
@@ -84,7 +92,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `lapkeu`
 --
 ALTER TABLE `lapkeu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`

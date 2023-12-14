@@ -54,8 +54,8 @@
             <form action="" method="post">
                 <img src="img/logo-sekunder-light.png" alt="MyHepeng">
                 <div class="form-group">
-                    <label for="fullname">fullname</label>
-                    <input type="text" class="form-control"  name="fullname" id="fullname" aria-describedby="emailHelp" placeholder="Your FullName" required>
+                    <label for="fullname">Nama Lengkap</label>
+                    <input type="text" class="form-control"  name="fullname" id="fullname" aria-describedby="emailHelp" placeholder="Your Full Name" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Alamat Email</label>
