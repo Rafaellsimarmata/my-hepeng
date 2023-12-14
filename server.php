@@ -8,7 +8,7 @@
         global $conn;
 
         $email = strtolower(stripslashes($data['email']));
-        $fullName = htmlspecialchars(stripslashes($data['fullname']););
+        $fullName = htmlspecialchars(stripslashes($data['fullname']));
         $password = mysqli_real_escape_string($conn, $data['password']);
         $password2 = mysqli_real_escape_string($conn, $data['password2']);
         
